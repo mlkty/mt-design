@@ -1,0 +1,71 @@
+{
+  "name": "@baidu/so-fig",
+  "version": "0.0.1",
+  "description": "A react library developed with dumi",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "dumi dev",
+    "build": "father build",
+    "build:watch": "father dev",
+    "docs:build": "dumi build",
+    "prepare": "husky install && dumi setup",
+    "doctor": "father doctor",
+    "lint": "npm run lint:es && npm run lint:css",
+    "lint:css": "stylelint \"{src,test}/**/*.{css,less}\"",
+    "lint:es": "eslint \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
+    "prepublishOnly": "father doctor && npm run build"
+  },
+  "authors": [
+    "liujinghan@baidu.com"
+  ],
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "lint-staged": {
+    "*.{ts,tsx,json,js}": "eslint",
+    "*.{scss,css,styl}": "stylelint"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "peerDependencies": {
+    "react": ">=16.9.0",
+    "react-dom": ">=16.9.0"
+  },
+  "devDependencies": {
+    "@ecomfe/eslint-config": "^7.4.0",
+    "@ecomfe/stylelint-config": "^1.1.2",
+    "@types/lodash-es": "^4.17.7",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "dumi": "^2.1.22",
+    "eslint": "^8.23.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "father": "^4.1.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "postcss-scss": "^4.0.6",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "stylelint": "^14.9.1",
+    "stylelint-scss": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "packageManager": "pnpm@7.0.0",
+  "dependencies": {
+    "ahooks": "^3.7.7",
+    "classnames": "^2.3.2",
+    "lodash-es": "^4.17.21",
+    "react-is": "^18.2.0"
+  }
+}
