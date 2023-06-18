@@ -1,0 +1,16 @@
+.mt-space {
+  display: inline-flex;
+  gap: var(--size);
+
+  &--block {
+    display: flex;
+  }
+
+  &--vertical {
+    flex-direction: column;
+  }
+
+  &--wrap {
+    flex-wrap: wrap;
+  }
+}

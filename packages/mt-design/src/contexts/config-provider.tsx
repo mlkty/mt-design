@@ -1,0 +1,54 @@
+import { createContext, useCallback, useContext, useMemo } from 'react';
+
+interface ConfigProviderProps {
+  prefixCls?: string;
+  children?: React.ReactNode;
+}
+
+interface ConfigContextValue {
+  getPrefixCls: (name: string) => string;
+}
+
+const DEFAULT_PREFIXCLS = 'mt';
+
+const getPrefixCls = (name: string, customPrefixCls?: string) => {
+  if (customPrefixCls) {
+    return customPrefixCls;
+  }
+  return name ? `${DEFAULT_PREFIXCLS}-${name}` : DEFAULT_PREFIXCLS;
+};
+
+const ConfigContext = createContext<ConfigContextValue>({
+  getPrefixCls,
+});
+
+const ConfigProvider = (props: ConfigProviderProps) => {
+  const { prefixCls } = props;
+
+  const getPrefixCls = useCallback(
+    (name: string, customPrefixCls?: string) => {
+      if (customPrefixCls) {
+        return customPrefixCls;
+      }
+      const prefix = prefixCls ? prefixCls : DEFAULT_PREFIXCLS;
+      return name ? `${prefix}-${name}` : prefix;
+    },
+    [prefixCls],
+  );
+
+  const contextValue = useMemo<ConfigContextValue>(() => {
+    return {
+      getPrefixCls,
+    };
+  }, [getPrefixCls]);
+
+  return (
+    <ConfigContext.Provider value={contextValue}>
+      {props.children}
+    </ConfigContext.Provider>
+  );
+};
+
+const useConfigContext = () => useContext(ConfigContext);
+
+export { ConfigProvider, useConfigContext };
