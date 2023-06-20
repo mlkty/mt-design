@@ -44,7 +44,9 @@ function Space(props: SpaceProps) {
       <Fragment key={key}>
         <SpaceItem key={key}>{child}</SpaceItem>
         {index !== arr.length - 1 && props.split && (
-          <div className={`${prefixCls}-split`}>{props.split}</div>
+          <div className={`${prefixCls}-split`} role="split">
+            {props.split}
+          </div>
         )}
       </Fragment>
     );

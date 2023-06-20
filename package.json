@@ -53,9 +53,6 @@
     "prettier-plugin-packagejson": "^2.2.18",
     "stylelint": "^14.9.1"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "authors": [
     "dragon.jinghan.liu@gmail.com"
   ]
