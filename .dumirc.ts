@@ -21,11 +21,16 @@ export default defineConfig({
         type: 'components',
         dir: 'packages/mt-design/src/components',
       },
+      {
+        type: 'headless',
+        dir: 'packages/mt-design-headless/src/components',
+      },
     ],
   },
 
   alias: {
     '@mlkty/mt-shared-utils': resolvePackage('mt-shared-utils'),
+    '@mlkty/mt-design-headless': resolvePackage('mt-design-headless'),
     '@mlkty/mt-design': resolvePackage('mt-design'),
   },
 });

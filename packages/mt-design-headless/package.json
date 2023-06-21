@@ -1,6 +1,9 @@
 {
   "name": "@mlkty/mt-design-headless",
   "version": "0.0.1-alpha.0",
+  "dependencies": {
+    "@mlkty/mt-shared-utils": "workspace:0.0.1-alpha.0"
+  },
   "devDependencies": {
     "@types/react": "^18.2.12",
     "@types/react-dom": "^18.2.5",
