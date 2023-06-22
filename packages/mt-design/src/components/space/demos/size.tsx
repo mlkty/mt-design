@@ -1,4 +1,4 @@
-import { Space, type SpaceSize } from '@mlkty/mt-design';
+import { Space, Button, type SpaceSize } from '@mlkty/mt-design';
 import { useState } from 'react';
 
 export default function Demo() {
@@ -8,13 +8,13 @@ export default function Demo() {
 
   return (
     <>
-      <div>
+      <Space block>
         {sizes.map((item) => (
-          <button key={item} type="button" onClick={() => setSize(item)}>
+          <Button key={item} onClick={() => setSize(item)}>
             {item}
-          </button>
+          </Button>
         ))}
-      </div>
+      </Space>
       <Space size={size}>
         block1
         <>block2</>

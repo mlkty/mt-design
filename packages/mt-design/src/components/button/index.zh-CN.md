@@ -1,5 +1,7 @@
 ---
 title: Button
+demo:
+  cols: 2
 group:
   title: 基础组件
   order: 0
@@ -17,3 +19,6 @@ group:
 - 默认状态
 - 禁用状态
 - 加载状态
+
+<code src="./demos/base.tsx"></code>
+<code src="./demos/loading.tsx"></code>

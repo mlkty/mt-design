@@ -1,4 +1,4 @@
-import { Divider, Space } from '@mlkty/mt-design';
+import { Divider, Space, Button } from '@mlkty/mt-design';
 
 export default function Demo() {
   const arr = Array.from({ length: 3 }, (_, i) => i + 1);
@@ -6,9 +6,9 @@ export default function Demo() {
   return (
     <Space split={<Divider type="vertical" />}>
       {arr.map((item) => (
-        <button key={item} type="button">
+        <Button key={item} type="button">
           button {item}
-        </button>
+        </Button>
       ))}
     </Space>
   );
