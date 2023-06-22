@@ -17,7 +17,9 @@
     "paths": {
       "@mlkty/mt-shared-utils": ["../mt-shared-utils/src/index.ts"],
       "@mlkty/mt-design": ["./src/index.ts"],
-      "@mlkty/mt-design/*": ["./src/*"]
+      "@mlkty/mt-design/*": ["./src/*"],
+      "@mlkty/mt-design-headless": ["../mt-design-headless/src/index.ts"],
+      "@mlkty/mt-design-headless/*": ["../mt-design-headless/src/*"]
     }
   },
   "include": ["src/**/*.tsx", "src/**/*.ts"],

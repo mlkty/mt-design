@@ -11,7 +11,7 @@ interface CheckBoxProps
 
 const CheckBox = forwardRef<HTMLInputElement, CheckBoxProps>((props, ref) => {
   const {
-    prefixCls = 'mt-checkbox',
+    prefixCls = 'mth-checkbox',
     type = 'checkbox',
     disabled,
     className,
@@ -20,6 +20,7 @@ const CheckBox = forwardRef<HTMLInputElement, CheckBoxProps>((props, ref) => {
     defaultChecked,
     children,
     onChange,
+    role = 'checkbox',
     ...inputProps
   } = props;
 
@@ -43,7 +44,7 @@ const CheckBox = forwardRef<HTMLInputElement, CheckBoxProps>((props, ref) => {
   };
 
   return (
-    <label className={cls} style={style} role="checkbox">
+    <label className={cls} style={style} role={role}>
       <input
         {...inputProps}
         checked={value}
