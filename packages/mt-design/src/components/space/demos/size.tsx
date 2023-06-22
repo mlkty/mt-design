@@ -1,4 +1,4 @@
-import { Space, Button, type SpaceSize } from '@mlkty/mt-design';
+import { Space, Radio, type SpaceSize } from '@mlkty/mt-design';
 import { useState } from 'react';
 
 export default function Demo() {
@@ -9,11 +9,13 @@ export default function Demo() {
   return (
     <>
       <Space block>
-        {sizes.map((item) => (
-          <Button key={item} onClick={() => setSize(item)}>
-            {item}
-          </Button>
-        ))}
+        <Radio.Group onChange={(value) => setSize(value as SpaceSize)}>
+          {sizes.map((item) => (
+            <Radio key={item} value={item}>
+              {item}
+            </Radio>
+          ))}
+        </Radio.Group>
       </Space>
       <Space size={size}>
         block1
