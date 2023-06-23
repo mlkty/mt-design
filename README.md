@@ -35,6 +35,10 @@ $ pnpm run docs:build
 $ pnpm run doctor
 ```
 
+# browserslist
+
+http://browsersl.ist/#q=%3E0.25%25%2C+not+ie+11%2C+not+op_mini+all
+
 ## LICENSE
 
 MIT

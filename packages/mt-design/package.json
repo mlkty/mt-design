@@ -2,8 +2,10 @@
   "name": "@mlkty/mt-design",
   "version": "0.0.1-alpha.0",
   "description": "A light-weight react component library",
+  "type": "module",
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c rollup.config.mjs",
+    "compile": "rimraf es lib dist && gulp compile"
   },
   "dependencies": {
     "@mlkty/mt-design-headless": "workspace:0.0.1-alpha.0",

@@ -3,4 +3,5 @@ module.exports = {
   rules: {
     'react/button-has-type': 0,
   },
+  ignorePatterns: ['**/dist/**', '**/lib/**', '**/es/**', '**/node_modules/**'],
 };
