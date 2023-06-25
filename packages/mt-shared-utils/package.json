@@ -1,6 +1,20 @@
 {
   "name": "@mlkty/mt-shared-utils",
-  "version": "0.0.1-alpha.0",
+  "version": "1.0.0",
+  "keywords": [
+    "util",
+    "react",
+    "dom",
+    "types",
+    "hook"
+  ],
+  "main": "lib/index.js",
+  "unpkg": "dist/index.min.js",
+  "module": "es/index.js",
+  "typings": "es/index.d.ts",
+  "scripts": {
+    "build": "rimraf es lib dist && gulp build"
+  },
   "dependencies": {
     "classnames": "^2.3.2",
     "lodash.assignwith": "^4.2.0"
