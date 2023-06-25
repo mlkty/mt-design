@@ -1,5 +1,11 @@
 # @mlkty/mt-shared-utils
 
+## 2.0.0
+
+### Major Changes
+
+- add README.md and change .tsx to .ts
+
 ## 1.0.0
 
 ### Major Changes
