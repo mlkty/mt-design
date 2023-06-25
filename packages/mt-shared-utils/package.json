@@ -12,6 +12,11 @@
   "unpkg": "dist/index.min.js",
   "module": "es/index.js",
   "typings": "es/index.d.ts",
+  "files": [
+    "dist",
+    "es",
+    "lib"
+  ],
   "scripts": {
     "build": "rimraf es lib dist && gulp build"
   },
