@@ -3,9 +3,13 @@ node_modules
 .dumi/tmp
 .dumi/tmp-test
 .dumi/tmp-production
-
-# store
 .DS_Store
 .pnpm-store
 
-.husky
+# build
+dist/
+es/
+lib/
+
+# test
+coverage/
