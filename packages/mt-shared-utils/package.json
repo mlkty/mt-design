@@ -1,0 +1,41 @@
+{
+  "name": "@mlkty/mt-shared-utils",
+  "version": "1.0.1",
+  "keywords": [
+    "util",
+    "react",
+    "dom",
+    "types",
+    "hook"
+  ],
+  "main": "lib/index.js",
+  "unpkg": "dist/index.min.js",
+  "module": "es/index.js",
+  "typings": "es/index.d.ts",
+  "files": [
+    "dist",
+    "es",
+    "lib"
+  ],
+  "scripts": {
+    "build": "rimraf es lib dist && gulp build"
+  },
+  "dependencies": {
+    "classnames": "^2.3.2",
+    "lodash.assignwith": "^4.2.0"
+  },
+  "devDependencies": {
+    "@types/lodash.assignwith": "^4.2.7",
+    "@types/react": "^18.2.12",
+    "@types/react-dom": "^18.2.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "peerDependencies": {
+    "react": ">=16.9.0 || 17.* || ^18.*",
+    "react-dom": ">=16.9.0 || 17.* || ^18.*"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
