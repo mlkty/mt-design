@@ -1,6 +1,6 @@
 /* eslint-disable prefer-const */
-import { CheckBox, type CheckBoxProps } from '../checkbox';
-import { useRadioGroupContext } from './context';
+import {CheckBox, type CheckBoxProps} from '../checkbox';
+import {useRadioGroupContext} from './context';
 
 export type RadioValue = string | number;
 
@@ -9,33 +9,33 @@ export type RadioProps = CheckBoxProps & {
 };
 
 export function Radio(props: RadioProps) {
-  let {
-    prefixCls = 'mth-radio',
-    type = 'radio',
-    checked,
-    value,
-    onChange,
-    ...restProps
-  } = props;
+    let {
+        prefixCls = 'mth-radio',
+        type = 'radio',
+        checked,
+        value,
+        onChange,
+        ...restProps
+    } = props;
 
-  const context = useRadioGroupContext();
+    const context = useRadioGroupContext();
 
-  if (context) {
-    checked = context.value === value;
-    onChange = (checked: boolean, e: React.ChangeEvent<HTMLInputElement>) => {
-      context.onChange(value || '', e);
-      props.onChange?.(checked, e);
-    };
-  }
+    if (context) {
+        checked = context.value === value;
+        onChange = (checked: boolean, e: React.ChangeEvent<HTMLInputElement>) => {
+            context.onChange(value || '', e);
+            props.onChange?.(checked, e);
+        };
+    }
 
-  return (
-    <CheckBox
-      {...restProps}
-      type={type}
-      prefixCls={prefixCls}
-      role="radio"
-      checked={checked}
-      onChange={onChange}
-    />
-  );
+    return (
+        <CheckBox
+            role="radio"
+            prefixCls={prefixCls}
+            {...restProps}
+            type={type}
+            checked={checked}
+            onChange={onChange}
+        />
+    );
 }

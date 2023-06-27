@@ -28,8 +28,8 @@
     "@types/lodash.assignwith": "^4.2.7",
     "@types/react": "^18.2.12",
     "@types/react-dom": "^18.2.5",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "18.0.0",
+    "react-dom": "18.0.0"
   },
   "peerDependencies": {
     "react": ">=16.9.0 || 17.* || ^18.*",

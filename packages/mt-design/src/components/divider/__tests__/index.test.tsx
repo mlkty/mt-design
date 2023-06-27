@@ -1,17 +1,17 @@
 import {Divider} from '..';
-import {render} from '../../../../tests/utils';
+import {customRender} from '../../../../tests/utils';
 import mountTest from '../../../../tests/mountTest';
 
-describe('Button', () => {
+describe('Divider', () => {
     mountTest(Divider);
 
     it('render horizontal correctly', () => {
-        const {container} = render(<Divider />);
+        const {container} = customRender(<Divider />);
         expect(container.firstChild).toHaveClass('mt-divider mt-divider--horizontal', {exact: true});
     });
 
     it('render horizontal text correctly', () => {
-        const {container, rerender} = render(<Divider>Text</Divider>);
+        const {container, rerender} = customRender(<Divider>Text</Divider>);
 
         // classname
         const cls = (...args: string[]) =>
@@ -29,7 +29,7 @@ describe('Button', () => {
     });
 
     it('render vertical correctly', () => {
-        const {container} = render(<Divider direction="vertical">Text</Divider>);
+        const {container} = customRender(<Divider direction="vertical">Text</Divider>);
 
         // classname
         const cls = (...args: string[]) => args.concat(['mt-divider', 'mt-divider--vertical']).join(' ');
