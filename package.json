@@ -6,12 +6,9 @@
     "license": "MIT",
     "scripts": {
         "compile": "pnpm --filter @mlkty/mt-design compile",
+        "start": "pnpm dev",
         "dev": "dumi dev",
-        "docs:build": "dumi build",
-        "lint": "npm run lint:es && npm run lint:css",
-        "lint:css": "stylelint \"{src,test}/**/*.{css,less}\"",
-        "lint:es": "eslint \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
-        "start": "npm run dev"
+        "docs:build": "dumi build"
     },
     "commitlint": {
         "extends": [
@@ -19,20 +16,11 @@
         ]
     },
     "lint-staged": {
-        "*.{md,json}": [
-            "prettier --write --no-error-on-unmatched-pattern"
+        "*.{css,scss}": [
+            "stylelint --fix"
         ],
-        "*.{css,less}": [
-            "stylelint --fix",
-            "prettier --write"
-        ],
-        "*.{js,jsx}": [
-            "eslint --fix",
-            "prettier --write"
-        ],
-        "*.{ts,tsx}": [
-            "eslint --fix",
-            "prettier --parser=typescript --write"
+        "*.{ts,tsx,js,jsx}": [
+            "eslint --fix"
         ]
     },
     "devDependencies": {
@@ -72,9 +60,6 @@
         "minimist": "^1.2.8",
         "postcss": "^8.4.24",
         "postcss-scss": "^4.0.6",
-        "prettier": "^2.7.1",
-        "prettier-plugin-organize-imports": "^3.0.0",
-        "prettier-plugin-packagejson": "^2.2.18",
         "rimraf": "^5.0.1",
         "rollup-plugin-postcss": "^4.0.2",
         "rollup-plugin-sass": "^1.12.19",
