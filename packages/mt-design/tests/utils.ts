@@ -4,7 +4,11 @@ import {
     type RenderOptions,
 } from '@testing-library/react';
 
-const render = (ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>) =>
+const customRender = (ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>) =>
     pureRender(ui, {wrapper: StrictMode, ...options});
 
-export {pureRender, render};
+export {pureRender, customRender};
+
+export {default as userEvent} from '@testing-library/user-event';
+
+export * from '@testing-library/react';

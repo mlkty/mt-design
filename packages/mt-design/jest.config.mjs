@@ -13,8 +13,8 @@ export default {
     setupFilesAfterEnv: ['./tests/setupAfterEnv.ts'],
     moduleNameMapper: {
         '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
+        // react: path.resolve('node_modules/react/jsx-runtime.js'),
         '@mlkty/mt-shared-utils': path.resolve('../mt-shared-utils/src/index.ts'),
-        '@mlkty/mt-design': path.resolve('./src/index.ts'),
         '@mlkty/mt-design-headless': path.resolve('../mt-design-headless/src/index.ts'),
     },
     collectCoverageFrom: [
