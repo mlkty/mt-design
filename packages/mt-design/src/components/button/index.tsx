@@ -1,9 +1,9 @@
 import './index.scss';
 
-import { forwardRef } from 'react';
-import { c } from '@mlkty/mt-shared-utils';
+import {forwardRef} from 'react';
+import {c} from '@mlkty/mt-shared-utils';
 
-import { useConfigContext } from '../../contexts/config-provider';
+import {useConfigContext} from '../../contexts/config-provider';
 
 type NativeButtonProps = React.DetailedHTMLProps<
     React.ButtonHTMLAttributes<HTMLButtonElement>,
@@ -16,17 +16,17 @@ interface ButtonProps extends NativeButtonProps {
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
-    const { getPrefixCls } = useConfigContext();
+    const {getPrefixCls} = useConfigContext();
     const prefixCls = getPrefixCls('button');
 
-    const { disabled, loading, className, children, ...restProps } = props;
+    const {disabled, loading, className, children, ...restProps} = props;
 
     const cls = c(
         prefixCls,
         {
             [`${prefixCls}--disabled`]: disabled || loading,
         },
-        className,
+        className
     );
 
     return (
@@ -36,6 +36,6 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
     );
 });
 
-export { Button };
+export {Button};
 
-export type { ButtonProps };
+export type {ButtonProps};
