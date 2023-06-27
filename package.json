@@ -1,86 +1,87 @@
 {
-  "name": "mlkty",
-  "version": "0.0.1",
-  "private": true,
-  "description": "A react library developed with dumi",
-  "license": "MIT",
-  "scripts": {
-    "compile": "pnpm --filter @mlkty/mt-design compile",
-    "dev": "dumi dev",
-    "docs:build": "dumi build",
-    "lint": "npm run lint:es && npm run lint:css",
-    "lint:css": "stylelint \"{src,test}/**/*.{css,less}\"",
-    "lint:es": "eslint \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
-    "start": "npm run dev"
-  },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
+    "name": "mlkty",
+    "version": "0.0.1",
+    "private": true,
+    "description": "A react library developed with dumi",
+    "license": "MIT",
+    "scripts": {
+        "compile": "pnpm --filter @mlkty/mt-design compile",
+        "dev": "dumi dev",
+        "docs:build": "dumi build",
+        "lint": "npm run lint:es && npm run lint:css",
+        "lint:css": "stylelint \"{src,test}/**/*.{css,less}\"",
+        "lint:es": "eslint \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
+        "start": "npm run dev"
+    },
+    "commitlint": {
+        "extends": [
+            "@commitlint/config-conventional"
+        ]
+    },
+    "lint-staged": {
+        "*.{md,json}": [
+            "prettier --write --no-error-on-unmatched-pattern"
+        ],
+        "*.{css,less}": [
+            "stylelint --fix",
+            "prettier --write"
+        ],
+        "*.{js,jsx}": [
+            "eslint --fix",
+            "prettier --write"
+        ],
+        "*.{ts,tsx}": [
+            "eslint --fix",
+            "prettier --parser=typescript --write"
+        ]
+    },
+    "devDependencies": {
+        "@babel/plugin-transform-runtime": "^7.22.5",
+        "@babel/plugin-transform-typescript": "^7.22.5",
+        "@babel/preset-env": "^7.22.5",
+        "@changesets/cli": "^2.26.1",
+        "@commitlint/cli": "^17.1.2",
+        "@commitlint/config-conventional": "^17.1.0",
+        "@ecomfe/eslint-config": "^7.4.0",
+        "@ecomfe/stylelint-config": "^1.1.2",
+        "@rollup/plugin-babel": "^6.0.3",
+        "@rollup/plugin-commonjs": "^25.0.2",
+        "@rollup/plugin-node-resolve": "^15.1.0",
+        "@rollup/plugin-terser": "^0.4.3",
+        "@testing-library/react": "^14.0.0",
+        "@types/jest": "^29.5.2",
+        "@typescript-eslint/eslint-plugin": "^5.60.0",
+        "@typescript-eslint/parser": "^5.60.0",
+        "babel-plugin-import-visitor": "^0.2.0",
+        "dumi": "^2.2.0",
+        "eslint": "^8.23.0",
+        "eslint-plugin-import": "^2.27.5",
+        "eslint-plugin-react": "^7.32.2",
+        "eslint-plugin-react-hooks": "^4.6.0",
+        "gulp": "^4.0.2",
+        "gulp-babel": "^8.0.0",
+        "gulp-sass": "^5.1.0",
+        "gulp-typescript": "6.0.0-alpha.1",
+        "husky": "^8.0.1",
+        "jest": "^29.5.0",
+        "jest-environment-jsdom": "^29.5.0",
+        "lint-staged": "^13.0.3",
+        "merge2": "^1.4.1",
+        "minimist": "^1.2.8",
+        "postcss": "^8.4.24",
+        "postcss-scss": "^4.0.6",
+        "prettier": "^2.7.1",
+        "prettier-plugin-organize-imports": "^3.0.0",
+        "prettier-plugin-packagejson": "^2.2.18",
+        "rimraf": "^5.0.1",
+        "rollup-plugin-postcss": "^4.0.2",
+        "rollup-plugin-sass": "^1.12.19",
+        "sass": "^1.63.6",
+        "stylelint": "^14.9.1",
+        "stylelint-scss": "^5.0.1",
+        "ts-jest": "^29.1.0"
+    },
+    "authors": [
+        "dragon.jinghan.liu@gmail.com"
     ]
-  },
-  "lint-staged": {
-    "*.{md,json}": [
-      "prettier --write --no-error-on-unmatched-pattern"
-    ],
-    "*.{css,less}": [
-      "stylelint --fix",
-      "prettier --write"
-    ],
-    "*.{js,jsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.{ts,tsx}": [
-      "eslint --fix",
-      "prettier --parser=typescript --write"
-    ]
-  },
-  "devDependencies": {
-    "@babel/plugin-transform-runtime": "^7.22.5",
-    "@babel/plugin-transform-typescript": "^7.22.5",
-    "@babel/preset-env": "^7.22.5",
-    "@changesets/cli": "^2.26.1",
-    "@commitlint/cli": "^17.1.2",
-    "@commitlint/config-conventional": "^17.1.0",
-    "@ecomfe/eslint-config": "^7.4.0",
-    "@rollup/plugin-babel": "^6.0.3",
-    "@rollup/plugin-commonjs": "^25.0.2",
-    "@rollup/plugin-node-resolve": "^15.1.0",
-    "@rollup/plugin-terser": "^0.4.3",
-    "@testing-library/react": "^14.0.0",
-    "@types/jest": "^29.5.2",
-    "@typescript-eslint/eslint-plugin": "^5.60.0",
-    "@typescript-eslint/parser": "^5.60.0",
-    "@umijs/lint": "^4.0.0",
-    "babel-plugin-import-visitor": "^0.2.0",
-    "dumi": "^2.2.0",
-    "eslint": "^8.23.0",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-react": "^7.32.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "father": "^4.1.0",
-    "gulp": "^4.0.2",
-    "gulp-babel": "^8.0.0",
-    "gulp-sass": "^5.1.0",
-    "gulp-typescript": "6.0.0-alpha.1",
-    "husky": "^8.0.1",
-    "jest": "^29.5.0",
-    "jest-environment-jsdom": "^29.5.0",
-    "lint-staged": "^13.0.3",
-    "merge2": "^1.4.1",
-    "minimist": "^1.2.8",
-    "postcss": "^8.4.24",
-    "prettier": "^2.7.1",
-    "prettier-plugin-organize-imports": "^3.0.0",
-    "prettier-plugin-packagejson": "^2.2.18",
-    "rimraf": "^5.0.1",
-    "rollup-plugin-postcss": "^4.0.2",
-    "rollup-plugin-sass": "^1.12.19",
-    "sass": "^1.63.6",
-    "stylelint": "^14.9.1",
-    "ts-jest": "^29.1.0"
-  },
-  "authors": [
-    "dragon.jinghan.liu@gmail.com"
-  ]
 }

@@ -1,5 +1,8 @@
 {
-  "editor.codeActionsOnSave": {
-    "source.fixAll": true
-  }
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true
+    },
+    "stylelint.enable": true,
+    "stylelint.validate": ["css", "less", "scss", "postcss"],
+    "editor.renderWhitespace": "boundary"
 }
