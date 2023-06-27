@@ -19,17 +19,19 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
     const { getPrefixCls } = useConfigContext();
     const prefixCls = getPrefixCls('button');
 
+    const { disabled, loading, className, children, ...restProps } = props;
+
     const cls = c(
         prefixCls,
         {
-            [`${prefixCls}--disabled`]: props.disabled || props.loading,
+            [`${prefixCls}--disabled`]: disabled || loading,
         },
-        props.className,
+        className,
     );
 
     return (
-        <button {...props} className={cls} ref={ref} role="button">
-            {props.children}
+        <button role="button" className={cls} {...restProps} ref={ref}>
+            {children}
         </button>
     );
 });
