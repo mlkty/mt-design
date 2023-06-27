@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button render children correctly 1`] = `
+<button
+  class="mt-button"
+  role="button"
+>
+  Follow
+</button>
+`;

@@ -10,6 +10,7 @@ export default {
     coverageDirectory: 'coverage',
     testEnvironment: 'jsdom',
     moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'md'],
+    setupFilesAfterEnv: ['./tests/setupAfterEnv.ts'],
     moduleNameMapper: {
         '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
         '@mlkty/mt-shared-utils': path.resolve('../mt-shared-utils/src/index.ts'),
