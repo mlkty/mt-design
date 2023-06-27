@@ -1,42 +1,43 @@
 import './index.scss';
 
-import { type NativeProps, withNativeProps, c } from '@mlkty/mt-shared-utils';
-import { useConfigContext } from '../../contexts/config-provider';
+import {type MergeProps, withMergeProps, c} from '@mlkty/mt-shared-utils';
+import {useConfigContext} from '../../contexts/config-provider';
 
-type DividerProps = NativeProps & {
+type DividerProps = MergeProps & {
   align?: 'left' | 'center' | 'right';
-  type?: 'horizontal' | 'vertical';
+  direction?: 'horizontal' | 'vertical';
   children?: React.ReactNode;
 };
 
 function Divider(props: DividerProps) {
-  const { getPrefixCls } = useConfigContext();
-  const {
-    type = 'horizontal',
-    children,
-    align = 'center',
-    ...restProps
-  } = props;
+    const {getPrefixCls} = useConfigContext();
+    const {
+        direction = 'horizontal',
+        children,
+        align = 'center',
+        ...restProps
+    } = props;
 
-  const prefixCls = getPrefixCls('divider');
-  const hasChildren = !!children;
-  const isVertical = type === 'vertical';
+    const prefixCls = getPrefixCls('divider');
+    const hasChildren = !!children;
 
-  const cls = c(prefixCls, `${prefixCls}--${type}`, {
-    [`${prefixCls}--${align}`]: !isVertical,
-    [`${prefixCls}--with-text`]: hasChildren,
-  });
+    const isNotVerticalMode = hasChildren && direction !== 'vertical';
 
-  return withNativeProps(
-    restProps,
-    <div className={cls} role="separator">
-      {hasChildren && type !== 'vertical' && (
-        <span className={`${prefixCls}-text`}>{children}</span>
-      )}
-    </div>,
-  );
+    const cls = c(prefixCls, `${prefixCls}--${direction}`, {
+        [`${prefixCls}--${align}`]: isNotVerticalMode,
+        [`${prefixCls}--with-text`]: isNotVerticalMode,
+    });
+
+    return withMergeProps(
+        restProps,
+        <div className={cls} role="separator">
+            {isNotVerticalMode && (
+                <span className={`${prefixCls}-text`}>{children}</span>
+            )}
+        </div>
+    );
 }
 
-export { Divider };
+export {Divider};
 
-export type { DividerProps };
+export type {DividerProps};
