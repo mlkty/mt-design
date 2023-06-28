@@ -18,7 +18,10 @@ export default {
         '@mlkty/mt-design-headless': path.resolve('../mt-design-headless/src/index.ts'),
     },
     collectCoverageFrom: [
-        '**/__tests__/**/*.{ts,tsx}',
+        'src/components/**/*.{ts,tsx}',
+        'src/contexts/**/*.{ts,tsx}',
+        '!src/components/**/__tests__/**/*.{ts,tsx}',
+        '!src/components/**/demos/**/*.{ts,tsx}',
     ],
     testPathIgnorePatterns: ['/node_modules/'],
     maxWorkers: '50%',

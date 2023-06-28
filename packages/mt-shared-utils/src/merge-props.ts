@@ -39,7 +39,7 @@ export function withMergeProps<P extends MergeProps>(
 
     if (props.style) {
         p.style = {
-            ...p.style,
+            ...element.props.style,
             ...props.style,
         };
     }

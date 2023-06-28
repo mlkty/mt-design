@@ -1,8 +1,8 @@
 import './index.scss';
 
-import { Space } from './space';
-import type { SpaceProps, Size as SpaceSize } from './space';
+import {Space} from './space';
+import type {SpaceProps, Size as SpaceSize} from './space';
 
-export { Space };
+export {Space};
 
-export type { SpaceProps, SpaceSize };
+export type {SpaceProps, SpaceSize};

@@ -1,16 +1,16 @@
 .mt-space {
-  display: inline-flex;
-  gap: var(--size);
+    display: inline-flex;
+    gap: var(--size);
 
-  &--block {
-    display: flex;
-  }
+    &--block {
+        display: flex;
+    }
 
-  &--vertical {
-    flex-direction: column;
-  }
+    &--vertical {
+        flex-direction: column;
+    }
 
-  &--wrap {
-    flex-wrap: wrap;
-  }
+    &--wrap {
+        flex-wrap: wrap;
+    }
 }
