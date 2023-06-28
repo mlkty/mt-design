@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useMemo } from 'react';
+import {createContext, useCallback, useContext, useMemo} from 'react';
 
 interface ConfigProviderProps {
     prefixCls?: string;
@@ -6,7 +6,7 @@ interface ConfigProviderProps {
 }
 
 interface ConfigContextValue {
-    getPrefixCls: (name: string) => string;
+    getPrefixCls: (name: string, customPrefixCls?: string) => string;
 }
 
 const DEFAULT_PREFIXCLS = 'mt';
@@ -15,7 +15,7 @@ const getPrefixCls = (name: string, customPrefixCls?: string) => {
     if (customPrefixCls) {
         return customPrefixCls;
     }
-    return name ? `${DEFAULT_PREFIXCLS}-${name}` : DEFAULT_PREFIXCLS;
+    return `${DEFAULT_PREFIXCLS}-${name}`;
 };
 
 const ConfigContext = createContext<ConfigContextValue>({
@@ -23,7 +23,7 @@ const ConfigContext = createContext<ConfigContextValue>({
 });
 
 const ConfigProvider = (props: ConfigProviderProps) => {
-    const { prefixCls } = props;
+    const {prefixCls} = props;
 
     const getPrefixCls = useCallback(
         (name: string, customPrefixCls?: string) => {
@@ -31,9 +31,9 @@ const ConfigProvider = (props: ConfigProviderProps) => {
                 return customPrefixCls;
             }
             const prefix = prefixCls ? prefixCls : DEFAULT_PREFIXCLS;
-            return name ? `${prefix}-${name}` : prefix;
+            return `${prefix}-${name}`;
         },
-        [prefixCls],
+        [prefixCls]
     );
 
     const contextValue = useMemo<ConfigContextValue>(() => {
@@ -51,4 +51,4 @@ const ConfigProvider = (props: ConfigProviderProps) => {
 
 const useConfigContext = () => useContext(ConfigContext);
 
-export { ConfigProvider, useConfigContext };
+export {ConfigProvider, useConfigContext};

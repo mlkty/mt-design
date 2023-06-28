@@ -1,0 +1,269 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button render size snapshot 1`] = `
+HTMLCollection [
+  <div
+    class="mt-space mt-space--horizontal"
+    role="space"
+    style="--size: 8px;"
+  >
+    <div
+      class="mt-space-item"
+    >
+      <span>
+        1
+      </span>
+    </div>
+    <div
+      class="mt-space-item"
+    >
+      <span>
+        2
+      </span>
+    </div>
+    <div
+      class="mt-space-item"
+    >
+      no element
+    </div>
+  </div>,
+  <div
+    class="mt-space mt-space--horizontal"
+    role="space"
+    style="--size: 16px;"
+  >
+    <div
+      class="mt-space-item"
+    >
+      <span>
+        1
+      </span>
+    </div>
+    <div
+      class="mt-space-item"
+    >
+      <span>
+        2
+      </span>
+    </div>
+  </div>,
+  <div
+    class="mt-space mt-space--horizontal"
+    role="space"
+    style="--size: 24px;"
+  >
+    <div
+      class="mt-space-item"
+    >
+      <span>
+        1
+      </span>
+    </div>
+    <div
+      class="mt-space-item"
+    >
+      <span>
+        2
+      </span>
+    </div>
+  </div>,
+  <div
+    class="mt-space mt-space--horizontal"
+    role="space"
+    style="--size: 12px;"
+  >
+    <div
+      class="mt-space-item"
+    >
+      <span>
+        1
+      </span>
+    </div>
+    <div
+      class="mt-space-item"
+    >
+      <span>
+        2
+      </span>
+    </div>
+  </div>,
+]
+`;
+
+exports[`Button should render split by divier 1`] = `
+HTMLCollection [
+  <div
+    class="mt-space-item"
+  >
+    <span>
+      1
+    </span>
+  </div>,
+  <span
+    class="mt-space-split"
+    role="space-split"
+  >
+    <div
+      class="mt-divider mt-divider--vertical"
+      role="separator"
+    />
+  </span>,
+  <div
+    class="mt-space-item"
+  >
+    <span>
+      2
+    </span>
+  </div>,
+  <span
+    class="mt-space-split"
+    role="space-split"
+  >
+    <div
+      class="mt-divider mt-divider--vertical"
+      role="separator"
+    />
+  </span>,
+  <div
+    class="mt-space-item"
+  >
+    <span>
+      3
+    </span>
+  </div>,
+]
+`;
+
+exports[`Space render size snapshot 1`] = `
+HTMLCollection [
+  <div
+    class="mt-space mt-space--horizontal"
+    role="space"
+    style="--size: 8px;"
+  >
+    <div
+      class="mt-space-item"
+    >
+      <span>
+        1
+      </span>
+    </div>
+    <div
+      class="mt-space-item"
+    >
+      <span>
+        2
+      </span>
+    </div>
+    <div
+      class="mt-space-item"
+    >
+      no element
+    </div>
+  </div>,
+  <div
+    class="mt-space mt-space--horizontal"
+    role="space"
+    style="--size: 16px;"
+  >
+    <div
+      class="mt-space-item"
+    >
+      <span>
+        1
+      </span>
+    </div>
+    <div
+      class="mt-space-item"
+    >
+      <span>
+        2
+      </span>
+    </div>
+  </div>,
+  <div
+    class="mt-space mt-space--horizontal"
+    role="space"
+    style="--size: 24px;"
+  >
+    <div
+      class="mt-space-item"
+    >
+      <span>
+        1
+      </span>
+    </div>
+    <div
+      class="mt-space-item"
+    >
+      <span>
+        2
+      </span>
+    </div>
+  </div>,
+  <div
+    class="mt-space mt-space--horizontal"
+    role="space"
+    style="--size: 12px;"
+  >
+    <div
+      class="mt-space-item"
+    >
+      <span>
+        1
+      </span>
+    </div>
+    <div
+      class="mt-space-item"
+    >
+      <span>
+        2
+      </span>
+    </div>
+  </div>,
+]
+`;
+
+exports[`Space should render split by divier 1`] = `
+HTMLCollection [
+  <div
+    class="mt-space-item"
+  >
+    <span>
+      1
+    </span>
+  </div>,
+  <span
+    class="mt-space-split"
+    role="space-split"
+  >
+    <div
+      class="mt-divider mt-divider--vertical"
+      role="separator"
+    />
+  </span>,
+  <div
+    class="mt-space-item"
+  >
+    <span>
+      2
+    </span>
+  </div>,
+  <span
+    class="mt-space-split"
+    role="space-split"
+  >
+    <div
+      class="mt-divider mt-divider--vertical"
+      role="separator"
+    />
+  </span>,
+  <div
+    class="mt-space-item"
+  >
+    <span>
+      3
+    </span>
+  </div>,
+]
+`;
