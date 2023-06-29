@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkbox render checkbox classname correctly 1`] = `
+<div>
+  <label
+    class="mt-checkbox"
+    role="checkbox"
+  >
+    <input
+      type="checkbox"
+    />
+    <span
+      class="mt-checkbox-input"
+    />
+    <span
+      class="mt-checkbox-inner"
+    />
+  </label>
+</div>
+`;

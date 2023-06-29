@@ -1,0 +1,70 @@
+.mt-checkbox {
+    --mt-checkbox-color: var(--mt-text-main-color, #11114a);
+    --mt-checkbox-bg-color: var(--mt-color-white, #fff);
+    --mt-checkbox-icon-color: var(--mt-checkbox-border-color);
+    --mt-checkbox-border-color: var(--mt-border-color, #d9d9d9);
+    --mt-checkbox-scale-size: 0;
+
+    display: inline-flex;
+    align-items: center;
+    font-size: 14px;
+    line-height: 22px;
+    box-sizing: border-box;
+    color: var(--mt-checkbox-color);
+
+    // ========== children ==========
+    > input {
+        display: none;
+    }
+
+    &-input {
+        position: relative;
+        width: 16px;
+        height: 16px;
+        border-radius: 4px;
+        border-collapse: separate;
+        border: 1px solid var(--mt-checkbox-border-color);
+        background-color: var(--mt-checkbox-bg-color);
+        box-sizing: border-box;
+        transition: all .2s ease-in;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 6px;
+            height: 9px;
+            border: 2px solid var(--mt-checkbox-icon-color);
+            box-sizing: border-box;
+            border-top: 0;
+            border-left: 0;
+            transform: scale(var(--mt-checkbox-scale-size)) translate(-50%, -60%) rotate(45deg);
+            transition: all .2s cubic-bezier(.12, .4, .29, 1.46);
+        }
+    }
+
+    &-inner {
+        padding: 0 8px;
+    }
+
+    // ========== modify ==========
+    &--checked {
+        --mt-checkbox-bg-color: var(--mt-primary-color);
+        --mt-checkbox-icon-color: var(--mt-color-white);
+        --mt-checkbox-border-color: var(--mt-primary-color);
+        --mt-checkbox-scale-size: 1;
+    }
+
+    &:hover:not(.mt-checkbox--disabled) {
+        --mt-checkbox-border-color: var(--mt-primary-color);
+    }
+
+    &--disabled {
+        --mt-checkbox-bg-color: var(--mt-disabled-bg-color);
+        --mt-checkbox-icon-color: var(--mt-border-color);
+        --mt-checkbox-border-color: var(--mt-border-color);
+
+        cursor: not-allowed;
+    }
+}

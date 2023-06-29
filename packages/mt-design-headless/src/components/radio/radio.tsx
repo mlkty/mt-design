@@ -1,10 +1,10 @@
 /* eslint-disable prefer-const */
-import {CheckBox, type CheckBoxProps} from '../checkbox';
+import {Checkbox, type CheckboxProps} from '../checkbox';
 import {useRadioGroupContext} from './context';
 
 export type RadioValue = string | number;
 
-export type RadioProps = CheckBoxProps & {
+export type RadioProps = CheckboxProps & {
   value?: RadioValue;
 };
 
@@ -29,7 +29,7 @@ export function Radio(props: RadioProps) {
     }
 
     return (
-        <CheckBox
+        <Checkbox
             role="radio"
             prefixCls={prefixCls}
             {...restProps}
