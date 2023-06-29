@@ -1,5 +1,5 @@
-import { createContext, useContext } from 'react';
-import { RadioValue } from './radio';
+import {createContext, useContext} from 'react';
+import {RadioValue} from './radio';
 
 export interface IRadioGroupContext {
   value: RadioValue;

@@ -1,10 +1,10 @@
 import {Children, Fragment, type ReactElement} from 'react';
-import {c, withMergeProps, type NativeProps} from '@mlkty/mt-shared-utils';
+import {c, withMergeProps, type MergeProps} from '@mlkty/mt-shared-utils';
 import {useConfigContext} from '../../contexts/config-provider';
 
 type Size = 'small' | 'middle' | 'large' | number;
 
-type SpaceProps = NativeProps<'--size'> & {
+type SpaceProps = MergeProps<'--size'> & {
   align?: 'start' | 'end' | 'center' | 'baseline';
 
   block?: boolean;

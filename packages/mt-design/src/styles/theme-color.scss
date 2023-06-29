@@ -1,8 +1,20 @@
-:root {
-  --mt-default-color: #11114a;
-  --mt-primary-color: #409eff;
 
-  --mt-font-main-color: var(--mt-default-color);
-  --mt-border-color: #eee;
-  --mt-border-dark-color: #d9d9d9;
+:root {
+    // theme-color
+    --mt-default-color: #11114a;
+    --mt-primary-color: #409eff;
+
+    // base color
+    --mt-color-white: #fff;
+    --mt-color-black: #000;
+
+    // font
+    --mt-text-main-color: var(--mt-default-color);
+    --mt-text-color-disabled: #c0c0c0;
+
+    // border
+    --mt-border-color: #d9d9d9;
+
+    // disabled
+    --mt-disabled-bg-color: rgba(0, 0, 0, .04);
 }

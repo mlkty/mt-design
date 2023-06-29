@@ -17,8 +17,8 @@ function Radio(props: RadioProps) {
     return withMergeProps(
         restProps,
         <MTRadio role="radio" prefixCls={prefixCls}>
-            <span className="mt-radio-input"></span>
-            <span className="mt-radio-inner">{children}</span>
+            <span className={`${prefixCls}-input`}></span>
+            <span className={`${prefixCls}-inner`}>{children}</span>
         </MTRadio>
     );
 }

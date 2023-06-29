@@ -2,10 +2,13 @@
     // ========== vars ==========
     --mt-radio-border-color: var(--mt-border-color, #d9d9d9);
     --mt-radio-scale-size: 0;
+    --mt-radio-bg-color: var(--mt-color-white, #fff);
 
     display: inline-flex;
     align-items: center;
     cursor: pointer;
+    font-size: 14px;
+    line-height: 22px;
 
     // ========== children ==========
     input {
@@ -19,7 +22,7 @@
         height: 16px;
         border: 1px solid var(--mt-radio-border-color);
         border-radius: 50%;
-        transition: all .3s ease;
+        transition: border .15s ease-in;
         box-sizing: border-box;
 
         &::before {
@@ -33,9 +36,9 @@
             width: 16px;
             height: 16px;
             border-radius: 8px;
-            background-color: var(--mt-radio-border-color);
+            background-color: var(--mt-radio-bg-color);
             box-sizing: border-box;
-            transition: all .3s ease;
+            transition: transform .15s ease-in;
             transform: scale(var(--mt-radio-scale-size));
         }
     }
@@ -52,12 +55,14 @@
     &--checked {
         --mt-radio-scale-size: .5;
         --mt-radio-border-color: var(--mt-primary-color);
+        --mt-radio-bg-color: var(--mt-primary-color);
     }
 
     &--disabled {
-        cursor: not-allowed;
+        --mt-radio-border-color: var(--mt-border-color);
+        --mt-radio-bg-color: var(--mt-border-color);
 
-        --mt-radio-border-color: var(--mt-border-dark-color);
+        cursor: not-allowed;
 
         .mt-radio-input {
             background-color: rgba(0, 0, 0, .04);
