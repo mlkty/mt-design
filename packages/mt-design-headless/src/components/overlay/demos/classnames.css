@@ -1,0 +1,27 @@
+.my-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.my-overlay-enter-active {
+    transition: all .3s ease-in-out;
+    background-color: rgba(0, 0, 0, .5);
+}
+
+.my-overlay-enter-done {
+    background-color: rgba(0, 0, 0, .5);
+}
+
+.my-overlay-exit {
+    background-color: rgba(0, 0, 0, .5);
+}
+
+.my-overlay-exit-active {
+    transition: all .3s ease-in-out;
+    background-color: rgba(0, 0, 0, 0);
+}

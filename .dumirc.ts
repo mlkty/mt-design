@@ -15,7 +15,12 @@ export default defineConfig({
     { id: 'zh-CN', name: '中文', suffix: '-cn' },
   ],
 
+  chainWebpack(memo) {
+    memo.entry('umi').add('./scripts/dev/setup.js');
+  },
+
   resolve: {
+    entryFile: "./index.ts",
     atomDirs: [
       {
         type: 'components',
