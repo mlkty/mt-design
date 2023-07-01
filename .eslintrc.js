@@ -20,6 +20,7 @@ module.exports = {
             'never',
             {
                 scss: 'always',
+                css: 'always',
                 json: 'always',
                 png: 'always',
                 mjs: 'always',

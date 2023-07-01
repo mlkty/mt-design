@@ -1,23 +1,17 @@
-import {type ReactNode, forwardRef, HTMLAttributes} from 'react';
+import {c, Transition, type TransitionProps, type TransitionStatus} from '@mlkty/mt-shared-utils';
+import {forwardRef, HTMLAttributes, useRef, useImperativeHandle} from 'react';
 
-interface OverlayProps extends HTMLAttributes<HTMLDivElement> {
-    visible?: boolean;
+interface OverlayRef {
+    nativeElement: HTMLDivElement | null;
+}
+
+type OverlayProps =
+& Omit<HTMLAttributes<HTMLDivElement>, keyof TransitionProps>
+& Omit<TransitionProps<HTMLDivElement>, 'nodeRef'>
+& {
+    prefixCls?: string;
+
     zIndex?: number;
-
-    /**
-     * animation duration, default 0.3s。
-     * By setting 0 to ban animation.
-     * @default 0.3
-     */
-    duration?: number;
-
-    children?: ReactNode;
-
-    /**
-     * whether to render the component when it is not visible.
-     * @default false
-     */
-    forceRender?: boolean;
 
     /**
      * Whether to lock the scroll of node, the default node is body.
@@ -30,24 +24,55 @@ interface OverlayProps extends HTMLAttributes<HTMLDivElement> {
      * @default null
      */
     getContainer?: HTMLElement | (() => HTMLElement) | null;
-}
+};
 
-const Overlay = forwardRef<HTMLDivElement, OverlayProps>((props, ref) => {
+const Overlay = forwardRef<OverlayRef, OverlayProps>((props, ref) => {
     const {
-        visible,
-        zIndex,
-        duration,
-        forceRender,
+        // transition props
+        visible = false,
+        classNames = 'mth-fade',
+        duration = 0.3,
+        mountOnEnter,
+        unmountOnExit,
+        onTransition,
+
         lockScroll,
         getContainer,
+        className,
+        zIndex,
+        prefixCls = 'mth-overlay',
         ...restProps
     } = props;
 
+    const domRef = useRef<HTMLDivElement>(null);
+
+    const cls = c(prefixCls, className);
+
+    useImperativeHandle(ref, () => ({
+        nativeElement: domRef.current,
+    }));
+
     return (
-        <div {...restProps} ref={ref}></div>
+        <Transition
+            visible={visible}
+            mountOnEnter
+            unmountOnExit
+            classNames={classNames}
+            nodeRef={domRef}
+            duration={duration}
+            onTransition={onTransition}
+        >
+            <div {...restProps} className={cls} ref={domRef}></div>
+        </Transition>
     );
 });
 
 export {
     Overlay,
+};
+
+export type {
+    OverlayProps,
+    OverlayRef,
+    TransitionStatus,
 };

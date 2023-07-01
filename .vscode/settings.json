@@ -4,5 +4,6 @@
     },
     "stylelint.enable": true,
     "stylelint.validate": ["css", "less", "scss", "postcss"],
-    "editor.renderWhitespace": "boundary"
+    "editor.renderWhitespace": "boundary",
+    "css.lint.unknownAtRules": "ignore"
 }
