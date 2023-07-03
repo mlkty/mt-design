@@ -1,5 +1,5 @@
 import {type Ref, type ReactNode} from 'react';
-import CSSTransition, {type CSSTransitionProps} from 'react-transition-group/CSSTransition';
+import {CSSTransition, type CSSTransitionProps} from '@mlkty/mt-shared-utils';
 
 type TransitionStatus =
 | 'enter'
@@ -16,6 +16,7 @@ type NativeTransitionProps<T extends HTMLElement> = Pick<CSSTransitionProps<T>,
 >;
 
 type TransitionProps<T extends HTMLElement = HTMLElement> = NativeTransitionProps<T> & {
+    appear?: boolean;
     visible?: boolean;
     duration?: number;
     onTransition?: (state: TransitionStatus) => void;
@@ -31,7 +32,7 @@ function Transition<T extends HTMLElement>(props: TransitionProps<T>) {
     const {
         visible,
         onTransition,
-        duration = 0.3,
+        duration = 300,
         children,
         ...restProps
     } = props;
@@ -51,8 +52,9 @@ function Transition<T extends HTMLElement>(props: TransitionProps<T>) {
     return (
         <CSSTransition
             {...restProps}
+            appear
             in={visible}
-            timeout={duration * 1000}
+            timeout={duration}
             onEnter={onEnter}
             onEntering={onEntering}
             onEntered={onEntered}

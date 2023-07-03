@@ -1,5 +1,8 @@
-import {c, Transition, type TransitionProps, type TransitionStatus} from '@mlkty/mt-shared-utils';
+import {c, resolveContainer} from '@mlkty/mt-shared-utils';
 import {forwardRef, HTMLAttributes, useRef, useImperativeHandle} from 'react';
+
+import {createPortal} from 'react-dom';
+import {Transition, type TransitionProps, type TransitionStatus} from '../transition';
 
 interface OverlayRef {
     nativeElement: HTMLDivElement | null;
@@ -10,8 +13,6 @@ type OverlayProps =
 & Omit<TransitionProps<HTMLDivElement>, 'nodeRef'>
 & {
     prefixCls?: string;
-
-    zIndex?: number;
 
     /**
      * Whether to lock the scroll of node, the default node is body.
@@ -30,16 +31,20 @@ const Overlay = forwardRef<OverlayRef, OverlayProps>((props, ref) => {
     const {
         // transition props
         visible = false,
+        appear = false,
         classNames = 'mth-fade',
-        duration = 0.3,
-        mountOnEnter,
-        unmountOnExit,
+        duration = 300,
+        // DOM nodes are usually expected to be removed.
+        mountOnEnter = true,
+        unmountOnExit = true,
         onTransition,
 
-        lockScroll,
+        // functional
         getContainer,
+        lockScroll,
+
+        // style
         className,
-        zIndex,
         prefixCls = 'mth-overlay',
         ...restProps
     } = props;
@@ -48,15 +53,18 @@ const Overlay = forwardRef<OverlayRef, OverlayProps>((props, ref) => {
 
     const cls = c(prefixCls, className);
 
+    const container = resolveContainer(getContainer);
+
     useImperativeHandle(ref, () => ({
         nativeElement: domRef.current,
     }));
 
-    return (
+    let node = (
         <Transition
             visible={visible}
-            mountOnEnter
-            unmountOnExit
+            appear={appear}
+            mountOnEnter={mountOnEnter}
+            unmountOnExit={unmountOnExit}
             classNames={classNames}
             nodeRef={domRef}
             duration={duration}
@@ -65,6 +73,12 @@ const Overlay = forwardRef<OverlayRef, OverlayProps>((props, ref) => {
             <div {...restProps} className={cls} ref={domRef}></div>
         </Transition>
     );
+
+    if (container) {
+        node = createPortal(node, container);
+    }
+
+    return node;
 });
 
 export {

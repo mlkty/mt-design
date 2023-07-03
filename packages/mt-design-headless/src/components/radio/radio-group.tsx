@@ -3,27 +3,27 @@ import {type ReactNode, useMemo} from 'react';
 import {RadioGroupContextProvider} from './context';
 import {type RadioValue} from './radio';
 
-export interface RadioGroupProps {
-  value?: RadioValue;
-  defaultValue?: RadioValue;
+export interface RadioGroupProps<T extends RadioValue = RadioValue> {
+  value?: T;
+  defaultValue?: T;
   name?: string;
   children?: ReactNode;
   onChange?: (
-    value: RadioValue,
+    value: T,
     e: React.ChangeEvent<HTMLInputElement>,
   ) => void;
 }
 
-export const RadioGroup = (props: RadioGroupProps) => {
+export const RadioGroup = <T extends RadioValue = RadioValue>(props: RadioGroupProps<T>) => {
     const {value, name, defaultValue, onChange, children} = props;
 
-    const [rawValue, setRawValue] = useControlled('', {
+    const [rawValue, setRawValue] = useControlled<T>('' as T, {
         defaultValue,
         value,
     });
 
     const handleChange = useEvent(
-        (value: RadioValue, e: React.ChangeEvent<HTMLInputElement>) => {
+        (value: T, e: React.ChangeEvent<HTMLInputElement>) => {
             setRawValue(value);
             onChange?.(value, e);
         }

@@ -4,7 +4,7 @@ import {useRadioGroupContext} from './context';
 
 export type RadioValue = string | number;
 
-export type RadioProps = CheckboxProps & {
+export type RadioProps = Omit<CheckboxProps, 'value'> & {
   value?: RadioValue;
 };
 
