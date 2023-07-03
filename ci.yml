@@ -1,0 +1,26 @@
+Global:
+  version: 2.0
+
+Default:
+  profile: [preview]
+
+Profiles:
+  - profile:
+    name: preview
+    mode: AGENT
+    environment:
+      image: DECK_CENTOS7U5_K3
+      tools:
+        - nodejs: 18.3.0
+        - pnpm: 7.2.1
+    check:
+      - reuse: TASK
+        enable: true
+    build:
+      command: sh ./scripts/preview.sh
+      cache:
+        enable: false
+        paths:
+          - node_modules
+    artifacts:
+      release: true
