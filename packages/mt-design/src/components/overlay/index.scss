@@ -1,0 +1,41 @@
+.mt-overlay {
+    --mt-overlay-background: var(--background-color, rgba(0, 0, 0, .5));
+    --mt-overlay-duration: var(--duration, .3s);
+    --mt-overlay-z-index: var(--z-index, 10);
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0;
+    z-index: var(--mt-overlay-z-index);
+    background-color: var(--mt-overlay-background);
+    transition: all var(--mt-overlay-duration) ease-in-out;
+    display: none;
+
+    // ========== animation ==========
+    &-fade-enter {
+        display: initial;
+    }
+
+    &-fade-enter-active {
+        display: initial;
+        opacity: 1;
+    }
+
+    &-fade-enter-done {
+        display: initial;
+        opacity: 1;
+    }
+
+    &-fade-exit {
+        display: initial;
+        opacity: 1;
+    }
+
+    &-fade-exit-active {
+        display: initial;
+        opacity: 0;
+    }
+}
