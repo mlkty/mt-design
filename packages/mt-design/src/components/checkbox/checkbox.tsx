@@ -1,7 +1,7 @@
 import {forwardRef} from 'react';
 import {Checkbox, CheckboxProps} from '@mlkty/mt-design-headless';
 import {type MergeProps, withMergeProps} from '@mlkty/mt-shared-utils';
-import {useConfigContext} from '../../contexts/config-provider';
+import {useConfigContext} from '../config-provider';
 import {useCheckboxGroupContext} from './context';
 
 type CheckboxValue = string | number;

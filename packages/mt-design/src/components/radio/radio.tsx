@@ -3,7 +3,7 @@ import {
     RadioProps as MTRadioProps,
 } from '@mlkty/mt-design-headless';
 import {withMergeProps} from '@mlkty/mt-shared-utils';
-import {useConfigContext} from '../../contexts/config-provider';
+import {useConfigContext} from '../config-provider';
 
 type RadioProps = MTRadioProps;
 

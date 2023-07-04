@@ -3,7 +3,7 @@ import './index.scss';
 import {forwardRef} from 'react';
 import {type MergeProps, c, withMergeProps} from '@mlkty/mt-shared-utils';
 
-import {useConfigContext} from '../../contexts/config-provider';
+import {useConfigContext} from '../config-provider';
 
 type NativeButtonProps = React.DetailedHTMLProps<
     React.ButtonHTMLAttributes<HTMLButtonElement>,

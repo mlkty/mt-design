@@ -34,6 +34,7 @@ function Transition<T extends HTMLElement>(props: TransitionProps<T>) {
         onTransition,
         duration = 300,
         children,
+        appear,
         ...restProps
     } = props;
 
@@ -52,7 +53,7 @@ function Transition<T extends HTMLElement>(props: TransitionProps<T>) {
     return (
         <CSSTransition
             {...restProps}
-            appear
+            appear={appear}
             in={visible}
             timeout={duration}
             onEnter={onEnter}

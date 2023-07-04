@@ -1,6 +1,6 @@
 import {Children, Fragment, type ReactElement} from 'react';
 import {c, withMergeProps, type MergeProps} from '@mlkty/mt-shared-utils';
-import {useConfigContext} from '../../contexts/config-provider';
+import {useConfigContext} from '../config-provider';
 
 type Size = 'small' | 'middle' | 'large' | number;
 

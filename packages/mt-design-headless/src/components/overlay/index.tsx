@@ -1,5 +1,5 @@
 import {c, resolveContainer} from '@mlkty/mt-shared-utils';
-import {forwardRef, HTMLAttributes, useRef, useImperativeHandle} from 'react';
+import {forwardRef, HTMLAttributes, useRef, useImperativeHandle, useEffect} from 'react';
 
 import {createPortal} from 'react-dom';
 import {Transition, type TransitionProps, type TransitionStatus} from '../transition';
@@ -10,15 +10,12 @@ interface OverlayRef {
 
 type OverlayProps =
 & Omit<HTMLAttributes<HTMLDivElement>, keyof TransitionProps>
-& Omit<TransitionProps<HTMLDivElement>, 'nodeRef'>
+& Omit<TransitionProps<HTMLDivElement>, 'appear' | 'nodeRef' | 'mountOnEnter' | 'unmountOnExit'>
 & {
     prefixCls?: string;
 
-    /**
-     * Whether to lock the scroll of node, the default node is body.
-     * @default true
-     */
-    lockScroll?: boolean | HTMLElement | (() => HTMLElement);
+    forceRender?: boolean;
+    destroyOnHide?: boolean;
 
     /**
      * if `getContainer` is set to null, the overlay will be appended to current node.
@@ -31,17 +28,15 @@ const Overlay = forwardRef<OverlayRef, OverlayProps>((props, ref) => {
     const {
         // transition props
         visible = false,
-        appear = false,
         classNames = 'mth-fade',
         duration = 300,
-        // DOM nodes are usually expected to be removed.
-        mountOnEnter = true,
-        unmountOnExit = true,
         onTransition,
+
+        forceRender = false,
+        destroyOnHide = true,
 
         // functional
         getContainer,
-        lockScroll,
 
         // style
         className,
@@ -50,29 +45,45 @@ const Overlay = forwardRef<OverlayRef, OverlayProps>((props, ref) => {
     } = props;
 
     const domRef = useRef<HTMLDivElement>(null);
-
-    const cls = c(prefixCls, className);
-
-    const container = resolveContainer(getContainer);
+    const firstRenderRef = useRef(true);
 
     useImperativeHandle(ref, () => ({
         nativeElement: domRef.current,
     }));
 
-    let node = (
-        <Transition
-            visible={visible}
-            appear={appear}
-            mountOnEnter={mountOnEnter}
-            unmountOnExit={unmountOnExit}
-            classNames={classNames}
-            nodeRef={domRef}
-            duration={duration}
-            onTransition={onTransition}
-        >
-            <div {...restProps} className={cls} ref={domRef}></div>
-        </Transition>
-    );
+    useEffect(() => {
+        if (forceRender && firstRenderRef.current && visible) {
+            firstRenderRef.current = false;
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [visible]);
+
+    const container = resolveContainer(getContainer);
+    const cls = c(prefixCls, className);
+
+    const contentNode = <div {...restProps} className={cls} ref={domRef}></div>;
+
+    let node = null;
+
+    if (forceRender && firstRenderRef.current && !visible) {
+        node = contentNode;
+    } else {
+        // when both the firstRender and the visible are true, it will render.
+        const appear = forceRender || (visible && firstRenderRef.current);
+        node = (
+            <Transition
+                visible={visible}
+                appear={appear}
+                unmountOnExit={destroyOnHide}
+                classNames={classNames}
+                nodeRef={domRef}
+                duration={duration}
+                onTransition={onTransition}
+            >
+                {contentNode}
+            </Transition>
+        );
+    }
 
     if (container) {
         node = createPortal(node, container);

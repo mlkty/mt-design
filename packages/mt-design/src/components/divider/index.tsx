@@ -1,7 +1,7 @@
 import './index.scss';
 
 import {type MergeProps, withMergeProps, c} from '@mlkty/mt-shared-utils';
-import {useConfigContext} from '../../contexts/config-provider';
+import {useConfigContext} from '../config-provider';
 
 type DividerProps = MergeProps & {
   align?: 'left' | 'center' | 'right';

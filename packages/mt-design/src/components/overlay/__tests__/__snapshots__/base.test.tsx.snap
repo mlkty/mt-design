@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Overlay render snapshot when visible correctly 1`] = `
+<div>
+  <div
+    class="mt-overlay mt-overlay--force mt-overlay-fade-appear mt-overlay-fade-appear-active"
+    style="--duration: 0.3s; --z-index: 10;"
+  />
+</div>
+`;

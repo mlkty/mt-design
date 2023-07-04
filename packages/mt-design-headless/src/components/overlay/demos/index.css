@@ -1,0 +1,34 @@
+.mth-demo-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    display: none;
+    opacity: 0;
+    transition: all .3s ease-in-out;
+    background-color: rgba(0, 0, 0, .5);
+}
+
+.mth-demo-overlay-enter {
+    display: initial;
+}
+
+.mth-demo-overlay-enter-active {
+    opacity: 1;
+}
+
+.mth-demo-overlay-enter-done {
+    opacity: 1;
+    display: initial;
+}
+
+.mth-demo-overlay-exit {
+    opacity: 1;
+    display: initial;
+}
+
+.mth-demo-overlay-exit-active {
+    opacity: 0;
+}

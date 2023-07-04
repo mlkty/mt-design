@@ -29,8 +29,8 @@ export function withMergeProps<P extends MergeProps>(
     element: ReactElement
 ) {
     const p = {
-        ...props,
         ...element.props,
+        ...props,
     };
 
     if (props.className) {

@@ -1,5 +1,5 @@
-import {customRender} from '../../../tests/utils';
-import {useConfigContext, ConfigProvider} from '../config-provider';
+import {customRender} from '../../../../tests/utils';
+import {useConfigContext, ConfigProvider} from '..';
 
 describe('ConfigProvider', () => {
     const CustomComponent = (props: {name?: string, customPrefixCls?: string}) => {

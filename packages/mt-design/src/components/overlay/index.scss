@@ -14,13 +14,30 @@
     transition: all var(--mt-overlay-duration) ease-in-out;
     display: none;
 
+    &--force {
+        &.mt-overlay {
+            &-fade-appear {
+                display: initial;
+                opacity: 0;
+            }
+
+            &-fade-appear-active {
+                opacity: 1;
+            }
+
+            &-fade-appear-done {
+                display: initial;
+                opacity: 1;
+            }
+        }
+    }
+
     // ========== animation ==========
     &-fade-enter {
         display: initial;
     }
 
     &-fade-enter-active {
-        display: initial;
         opacity: 1;
     }
 
@@ -35,7 +52,6 @@
     }
 
     &-fade-exit-active {
-        display: initial;
         opacity: 0;
     }
 }

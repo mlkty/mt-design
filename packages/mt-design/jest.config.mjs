@@ -19,7 +19,6 @@ export default {
     },
     collectCoverageFrom: [
         'src/components/**/*.{ts,tsx}',
-        'src/contexts/**/*.{ts,tsx}',
         '!src/components/**/__tests__/**/*.{ts,tsx}',
         '!src/components/**/demos/**/*.{ts,tsx}',
     ],
