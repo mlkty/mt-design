@@ -1,3 +1,5 @@
+import {HTMLAttributes, type CSSProperties} from 'react';
+
 export {default as c} from 'classnames';
 export * from './is-type';
 export * from './is-dom-env';
@@ -11,3 +13,7 @@ export * from './use-layout-effect';
 
 export {default as CSSTransition} from 'react-transition-group/CSSTransition';
 export type {CSSTransitionProps} from 'react-transition-group/CSSTransition';
+
+export type DefineProps<S extends string = never, E extends HTMLElement = HTMLElement> = HTMLAttributes<E> & {
+    style?: CSSProperties & Partial<Record<S, string>>;
+};

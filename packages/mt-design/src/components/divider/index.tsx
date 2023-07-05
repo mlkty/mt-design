@@ -1,9 +1,10 @@
 import './index.scss';
 
-import {type MergeProps, withMergeProps, c} from '@mlkty/mt-shared-utils';
+import {c} from '@mlkty/mt-shared-utils';
+import {HTMLAttributes} from 'react';
 import {useConfigContext} from '../config-provider';
 
-type DividerProps = MergeProps & {
+type DividerProps = HTMLAttributes<HTMLDivElement> & {
   align?: 'left' | 'center' | 'right';
   direction?: 'horizontal' | 'vertical';
   children?: React.ReactNode;
@@ -15,6 +16,7 @@ function Divider(props: DividerProps) {
         direction = 'horizontal',
         children,
         align = 'center',
+        className,
         ...restProps
     } = props;
 
@@ -26,11 +28,10 @@ function Divider(props: DividerProps) {
     const cls = c(prefixCls, `${prefixCls}--${direction}`, {
         [`${prefixCls}--${align}`]: isNotVerticalMode,
         [`${prefixCls}--with-text`]: isNotVerticalMode,
-    });
+    }, className);
 
-    return withMergeProps(
-        restProps,
-        <div className={cls} role="separator">
+    return (
+        <div role="separator" {...restProps} className={cls}>
             {isNotVerticalMode && (
                 <span className={`${prefixCls}-text`}>{children}</span>
             )}

@@ -1,12 +1,11 @@
 import {forwardRef} from 'react';
 import {Checkbox, CheckboxProps} from '@mlkty/mt-design-headless';
-import {type MergeProps, withMergeProps} from '@mlkty/mt-shared-utils';
 import {useConfigContext} from '../config-provider';
 import {useCheckboxGroupContext} from './context';
 
 type CheckboxValue = string | number;
 
-type InnerCheckboxProps = MergeProps & Omit<CheckboxProps, 'prefixCls'> & {
+type InnerCheckboxProps = Omit<CheckboxProps, 'prefixCls'> & {
     value?: CheckboxValue;
 };
 
@@ -31,9 +30,8 @@ const InnerCheckbox = forwardRef<HTMLInputElement, InnerCheckboxProps>((props, r
         };
     }
 
-    return withMergeProps(
-        restProps,
-        <Checkbox ref={ref} prefixCls={prefixCls}>
+    return (
+        <Checkbox prefixCls={prefixCls} {...restProps} ref={ref}>
             <span className={`${prefixCls}-input`}></span>
             <span className={`${prefixCls}-inner`}>{children}</span>
         </Checkbox>

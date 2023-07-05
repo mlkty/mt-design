@@ -1,10 +1,10 @@
 import {Children, Fragment, type ReactElement} from 'react';
-import {c, withMergeProps, type MergeProps} from '@mlkty/mt-shared-utils';
+import {c, type DefineProps} from '@mlkty/mt-shared-utils';
 import {useConfigContext} from '../config-provider';
 
 type Size = 'small' | 'middle' | 'large' | number;
 
-type SpaceProps = MergeProps<'--size'> & {
+type SpaceProps = DefineProps<'--size', HTMLDivElement> & {
   align?: 'start' | 'end' | 'center' | 'baseline';
 
   block?: boolean;
@@ -38,6 +38,7 @@ function Space(props: SpaceProps) {
         block,
         direction = 'horizontal',
         wrap,
+        className,
         ...restProps
     } = props;
     const size = useSpaceSize(rawSize || 'small');
@@ -63,15 +64,14 @@ function Space(props: SpaceProps) {
     const cls = c(prefixCls, `${prefixCls}--${direction}`, {
         [`${prefixCls}--block`]: block,
         [`${prefixCls}--wrap`]: wrap,
-    });
+    }, className);
 
     const gapStyle: SpaceProps['style'] = {
         '--size': size,
     };
 
-    return withMergeProps(
-        restProps,
-        <div className={cls} style={gapStyle} role="space">
+    return (
+        <div role="space" {...restProps} className={cls} style={gapStyle}>
             {children}
         </div>
     );

@@ -1,7 +1,7 @@
 import './index.scss';
 
 import {forwardRef} from 'react';
-import {type MergeProps, c, withMergeProps} from '@mlkty/mt-shared-utils';
+import {c} from '@mlkty/mt-shared-utils';
 
 import {useConfigContext} from '../config-provider';
 
@@ -10,7 +10,7 @@ type NativeButtonProps = React.DetailedHTMLProps<
     HTMLButtonElement
 >;
 
-type ButtonProps = MergeProps & NativeButtonProps & {
+type ButtonProps = NativeButtonProps & {
     loading?: boolean;
     children?: React.ReactNode;
 };
@@ -19,18 +19,18 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
     const {getPrefixCls} = useConfigContext();
     const prefixCls = getPrefixCls('button');
 
-    const {disabled, loading, children, ...restProps} = props;
+    const {disabled, loading, children, className, ...restProps} = props;
 
     const cls = c(
         prefixCls,
         {
             [`${prefixCls}--disabled`]: disabled || loading,
-        }
+        },
+        className
     );
 
-    return withMergeProps(
-        restProps,
-        <button role="button" className={cls} ref={ref}>
+    return (
+        <button role="button" {...restProps} className={cls} ref={ref}>
             {children}
         </button>
     );

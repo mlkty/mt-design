@@ -1,10 +1,10 @@
 import {forwardRef, useEffect} from 'react';
 import {Overlay, OverlayProps, OverlayRef} from '@mlkty/mt-design-headless';
-import {withMergeProps, type MergeProps, mergeProps, c, LockScroll} from '@mlkty/mt-shared-utils';
+import {type DefineProps, mergeProps, c, LockScroll} from '@mlkty/mt-shared-utils';
 import {useConfigContext} from '../config-provider';
 
 type InnerOverlayProps =
-& MergeProps<'--background-color' | '--duration' | '--z-index'>
+& DefineProps<'--background-color' | '--duration' | '--z-index', HTMLDivElement>
 & Omit<OverlayProps, 'prefixCls'>
 & {
     /**
@@ -38,6 +38,7 @@ const InnerOverlay = forwardRef<OverlayRef, InnerOverlayProps>((p, ref) => {
         firstAnimation = true,
         visible,
         lockScroll,
+        style: outerStyle,
         ...restProps
     } = mergeProps(defaultProps, p);
     const {getPrefixCls} = useConfigContext();
@@ -47,9 +48,10 @@ const InnerOverlay = forwardRef<OverlayRef, InnerOverlayProps>((p, ref) => {
     const style: InnerOverlayProps['style'] = {
         '--duration': `${duration / 1000}s`,
         '--z-index': `${zIndex}`,
+        ...outerStyle,
     };
 
-    const cls = c({
+    const cls = c(prefixCls, {
         [`${prefixCls}--force`]: firstAnimation,
     });
 
@@ -63,10 +65,9 @@ const InnerOverlay = forwardRef<OverlayRef, InnerOverlayProps>((p, ref) => {
         };
     }, [visible, lockScroll]);
 
-    return withMergeProps(
-        restProps,
+    return (
         <Overlay
-            prefixCls={prefixCls}
+            {...restProps}
             ref={ref}
             visible={visible}
             style={style}

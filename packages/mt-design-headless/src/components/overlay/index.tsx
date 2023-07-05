@@ -1,4 +1,4 @@
-import {c, resolveContainer} from '@mlkty/mt-shared-utils';
+import {resolveContainer} from '@mlkty/mt-shared-utils';
 import {forwardRef, HTMLAttributes, useRef, useImperativeHandle, useEffect} from 'react';
 
 import {createPortal} from 'react-dom';
@@ -12,8 +12,6 @@ type OverlayProps =
 & Omit<HTMLAttributes<HTMLDivElement>, keyof TransitionProps>
 & Omit<TransitionProps<HTMLDivElement>, 'appear' | 'nodeRef' | 'mountOnEnter' | 'unmountOnExit'>
 & {
-    prefixCls?: string;
-
     forceRender?: boolean;
     destroyOnHide?: boolean;
 
@@ -38,9 +36,6 @@ const Overlay = forwardRef<OverlayRef, OverlayProps>((props, ref) => {
         // functional
         getContainer,
 
-        // style
-        className,
-        prefixCls = 'mth-overlay',
         ...restProps
     } = props;
 
@@ -59,9 +54,8 @@ const Overlay = forwardRef<OverlayRef, OverlayProps>((props, ref) => {
     }, [visible]);
 
     const container = resolveContainer(getContainer);
-    const cls = c(prefixCls, className);
 
-    const contentNode = <div {...restProps} className={cls} ref={domRef}></div>;
+    const contentNode = <div {...restProps} ref={domRef}></div>;
 
     let node = null;
 

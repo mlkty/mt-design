@@ -1,13 +1,4 @@
-import c from 'classnames';
-import {cloneElement} from 'react';
 import assignWith from 'lodash.assignwith';
-
-import type {AriaAttributes, CSSProperties, ReactElement} from 'react';
-
-export type MergeProps<S extends string = never> = {
-  className?: string;
-  style?: CSSProperties & Partial<Record<S, string>>;
-} & AriaAttributes;
 
 function customizer(objValue: any, srcValue: any) {
     return srcValue === undefined ? objValue : srcValue;
@@ -22,26 +13,4 @@ export function mergeProps(...items: any[]) {
         target = assignWith(target, items[i], customizer);
     }
     return target;
-}
-
-export function withMergeProps<P extends MergeProps>(
-    props: P,
-    element: ReactElement
-) {
-    const p = {
-        ...element.props,
-        ...props,
-    };
-
-    if (props.className) {
-        p.className = c(element.props.className, props.className);
-    }
-
-    if (props.style) {
-        p.style = {
-            ...element.props.style,
-            ...props.style,
-        };
-    }
-    return cloneElement(element, p);
 }
