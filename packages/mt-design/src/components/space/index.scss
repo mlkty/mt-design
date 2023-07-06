@@ -13,4 +13,22 @@
     &--wrap {
         flex-wrap: wrap;
     }
+
+    &--align {
+        &-start {
+            align-items: flex-start;
+        }
+
+        &-center {
+            align-items: center;
+        }
+
+        &-end {
+            align-items: flex-end;
+        }
+
+        &-baseline {
+            align-items: baseline;
+        }
+    }
 }

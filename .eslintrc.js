@@ -58,6 +58,12 @@ module.exports = {
                 'import/no-commonjs': 'off',
             },
         },
+        {
+            files: ['**/demos/**/*.tsx', '**/__tests__/**/*.tsx'],
+            rules: {
+                'max-len': 'off',
+            },
+        },
     ],
 
     ignorePatterns: [

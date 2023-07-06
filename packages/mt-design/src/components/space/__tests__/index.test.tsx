@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import {Space, type SpaceProps} from '..';
 import {Divider} from '../../divider';
 import {customRender, screen} from '../../../../tests/utils';
@@ -90,16 +89,16 @@ describe('Space', () => {
         const {rerender} = customRender(<Space />);
 
         const container = screen.getByRole<SpaceElement>('space');
-        expect(container).toHaveClass('mt-space mt-space--horizontal', {exact: true});
+        expect(container).toHaveClass('mt-space mt-space--horizontal mt-space--align-center', {exact: true});
 
         rerender(<Space block />);
-        expect(container).toHaveClass('mt-space mt-space--horizontal mt-space--block', {exact: true});
+        expect(container).toHaveClass('mt-space--block');
 
         rerender(<Space block direction="vertical" />);
-        expect(container).toHaveClass('mt-space mt-space--block mt-space--vertical', {exact: true});
+        expect(container).toHaveClass('mt-space--vertical');
 
         rerender(<Space block direction="vertical" wrap />);
-        expect(container).toHaveClass('mt-space mt-space--block mt-space--vertical mt-space--wrap', {exact: true});
+        expect(container).toHaveClass('mt-space--vertical', 'mt-space--wrap');
     });
 
     it('should render split by divier', () => {

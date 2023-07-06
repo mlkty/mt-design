@@ -1,10 +1,13 @@
-import {Children, Fragment, type ReactElement} from 'react';
+import {Children, Fragment, HTMLAttributes, type ReactElement} from 'react';
 import {c, type DefineProps} from '@mlkty/mt-shared-utils';
 import {useConfigContext} from '../config-provider';
 
 type Size = 'small' | 'middle' | 'large' | number;
 
-type SpaceProps = DefineProps<HTMLDivElement, '--size'> & {
+type SpaceProps =
+& HTMLAttributes<HTMLDivElement>
+& DefineProps<'--size'>
+& {
   align?: 'start' | 'end' | 'center' | 'baseline';
 
   block?: boolean;
@@ -33,6 +36,8 @@ const useSpaceSize = (size: Size) => {
 
 function Space(props: SpaceProps) {
     const {
+        align = 'center',
+        split,
         size: rawSize,
         children: rawChildren,
         block,
@@ -51,9 +56,9 @@ function Space(props: SpaceProps) {
         return (
             <Fragment key={key}>
                 <div className={`${prefixCls}-item`}>{child}</div>
-                {index !== arr.length - 1 && props.split && (
+                {index !== arr.length - 1 && split && (
                     <span className={`${prefixCls}-split`} role="space-split">
-                        {props.split}
+                        {split}
                     </span>
                 )}
             </Fragment>
@@ -64,6 +69,7 @@ function Space(props: SpaceProps) {
     const cls = c(prefixCls, `${prefixCls}--${direction}`, {
         [`${prefixCls}--block`]: block,
         [`${prefixCls}--wrap`]: wrap,
+        [`${prefixCls}--align-${align}`]: align,
     }, className);
 
     const gapStyle: SpaceProps['style'] = {
