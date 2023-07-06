@@ -14,6 +14,6 @@ export * from './use-layout-effect';
 export {default as CSSTransition} from 'react-transition-group/CSSTransition';
 export type {CSSTransitionProps} from 'react-transition-group/CSSTransition';
 
-export type DefineProps<S extends string = never, E extends HTMLElement = HTMLElement> = HTMLAttributes<E> & {
+export type DefineProps<E extends HTMLElement = HTMLElement, S extends string = never> = HTMLAttributes<E> & {
     style?: CSSProperties & Partial<Record<S, string>>;
 };

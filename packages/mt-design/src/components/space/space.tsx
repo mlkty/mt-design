@@ -4,7 +4,7 @@ import {useConfigContext} from '../config-provider';
 
 type Size = 'small' | 'middle' | 'large' | number;
 
-type SpaceProps = DefineProps<'--size', HTMLDivElement> & {
+type SpaceProps = DefineProps<HTMLDivElement, '--size'> & {
   align?: 'start' | 'end' | 'center' | 'baseline';
 
   block?: boolean;

@@ -4,7 +4,7 @@ import {type DefineProps, mergeProps, c, LockScroll} from '@mlkty/mt-shared-util
 import {useConfigContext} from '../config-provider';
 
 type InnerOverlayProps =
-& DefineProps<'--background-color' | '--duration' | '--z-index', HTMLDivElement>
+& DefineProps<HTMLDivElement, '--background-color' | '--duration' | '--z-index'>
 & Omit<OverlayProps, 'prefixCls'>
 & {
     /**
