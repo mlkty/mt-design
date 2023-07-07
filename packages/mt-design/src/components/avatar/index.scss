@@ -1,0 +1,17 @@
+.mt-avatar {
+    --mt-color: var(--mt-color-white, #fff);
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, .25);
+    color: var(--mt-color);
+
+    &--square {
+        border-radius: 4px;
+    }
+
+    &--circle {
+        border-radius: 50%;
+    }
+}

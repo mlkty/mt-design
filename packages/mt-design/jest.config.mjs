@@ -6,7 +6,7 @@ import path from 'node:path';
 export default {
     preset: 'ts-jest',
     clearMocks: true,
-    collectCoverage: false,
+    collectCoverage: true,
     coverageDirectory: 'coverage',
     testEnvironment: 'jsdom',
     moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'md'],

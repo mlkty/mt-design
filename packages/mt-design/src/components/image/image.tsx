@@ -1,4 +1,4 @@
-import {c, isString} from '@mlkty/mt-shared-utils';
+import {c, isString, isUndefined} from '@mlkty/mt-shared-utils';
 import {
     forwardRef,
     useImperativeHandle,
@@ -9,6 +9,7 @@ import {
     type ReactElement,
     type ImgHTMLAttributes,
     type HTMLAttributes,
+    ReactNode,
 } from 'react';
 
 import {useConfigContext} from '../config-provider';
@@ -24,6 +25,7 @@ type ImageProps =
     height?: string | number;
     fit?: 'fill' | 'contain' | 'cover' | 'none' | 'scale-down';
     lazy?: boolean;
+    children?: ReactNode;
 
     rootClassName?: string;
     rootStyle?: CSSProperties;
@@ -46,6 +48,7 @@ const Image = forwardRef<ImageRef, ImageProps>((props, ref) => {
         // intermediate
         placeholder = true,
         fallback,
+        children,
 
         // style
         rootClassName,
@@ -56,6 +59,7 @@ const Image = forwardRef<ImageRef, ImageProps>((props, ref) => {
         height,
         fit = 'fill',
         lazy = false,
+        role = 'image',
 
         // events
         onLoad,
@@ -79,32 +83,36 @@ const Image = forwardRef<ImageRef, ImageProps>((props, ref) => {
 
     loadAndErrorRef.current.onLoad = () => {
         setStatus('success');
-        onLoad?.();
+        onLoad && onLoad();
     };
 
     loadAndErrorRef.current.onError = () => {
         setStatus('error');
-        onError?.();
+        onError && onError();
     };
 
     useEffect(() => {
-        if (initialize && prevSrcRef.current !== imgSrc) {
-            isValidImage(imgSrc || '').then(valid => {
-                // 防止图片快速切换后，多次触发 load
-                if (imgSrc !== prevSrcRef.current) {
-                    return;
-                }
-                if (valid) {
-                    setStatus('success');
-                    loadAndErrorRef.current.onLoad();
-                } else {
-                    setStatus('error');
-                    loadAndErrorRef.current.onError();
-                }
-            });
-            prevSrcRef.current = imgSrc;
-            setStatus('loading');
+        if (children
+            || !initialize
+            || prevSrcRef.current === imgSrc
+        ) {
+            return;
         }
+        isValidImage(imgSrc!).then(valid => {
+            // 防止图片快速切换后，多次触发 load
+            if (imgSrc !== prevSrcRef.current) {
+                return;
+            }
+            if (valid) {
+                setStatus('success');
+                loadAndErrorRef.current.onLoad();
+            } else {
+                setStatus('error');
+                loadAndErrorRef.current.onError();
+            }
+        });
+        prevSrcRef.current = imgSrc;
+        setStatus('loading');
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [imgSrc, initialize]);
 
@@ -119,9 +127,9 @@ const Image = forwardRef<ImageRef, ImageProps>((props, ref) => {
         height,
     };
 
-    const imgStyle = {
+    const imgStyle: CSSProperties = {
         ...style,
-        'object-fit': fit,
+        objectFit: fit,
         height, // to compat img default placeholder
     };
 
@@ -132,10 +140,10 @@ const Image = forwardRef<ImageRef, ImageProps>((props, ref) => {
     const src = initialize && isSuccess ? imgSrc : '';
 
     const renderIntermediate = (
-        intermediate: ReactElement | string | boolean,
+        intermediate?: ReactElement | string | boolean,
         attrs?: HTMLAttributes<HTMLDivElement>
     ) => {
-        if (intermediate === false) {
+        if (isUndefined(intermediate) || intermediate === false) {
             return null;
         }
         return (
@@ -150,7 +158,7 @@ const Image = forwardRef<ImageRef, ImageProps>((props, ref) => {
     };
 
     return (
-        <div ref={domRef} className={rootCls} style={wrapStyle}>
+        <div ref={domRef} className={rootCls} style={wrapStyle} role={role}>
             {
                 lazy && !initialize && (
                     <LazyDetector
@@ -161,25 +169,22 @@ const Image = forwardRef<ImageRef, ImageProps>((props, ref) => {
                 )
             }
             {
-                fallback && isError
-                    ? renderIntermediate(fallback, {role: 'fallback'})
-                    : (
-                        <img
-                            role="image"
-                            {...restProps}
-                            src={src}
-                            style={imgStyle}
-                            width={width}
-                            height={height}
-                            className={cls}
-                        />
-                    )
+                children
+                    ? children
+                    : isError
+                        ? renderIntermediate(fallback, {role: 'fallback'})
+                        : (
+                            <img
+                                {...restProps}
+                                src={src}
+                                style={imgStyle}
+                                width={width}
+                                height={height}
+                                className={cls}
+                            />
+                        )
             }
-            {
-                isLoading
-                && placeholder
-                && renderIntermediate(placeholder, {role: 'placeholder'})
-            }
+            {isLoading && renderIntermediate(placeholder, {role: 'placeholder'})}
         </div>
     );
 });

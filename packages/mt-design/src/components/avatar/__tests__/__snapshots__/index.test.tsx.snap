@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Avatar render avatar by empty src 1`] = `
+<div>
+  <div
+    class="mt-image mt-avatar mt-avatar--circle"
+    role="avatar"
+    style="font-size: 18px; width: 32px; height: 32px;"
+  >
+    <img
+      class="mt-image-img"
+      height="32"
+      src=""
+      style="object-fit: contain; height: 32px;"
+      width="32"
+    />
+  </div>
+</div>
+`;
+
+exports[`Avatar render avatar by src 1`] = `
+<div>
+  <div
+    class="mt-image mt-avatar mt-avatar--circle"
+    role="avatar"
+    style="font-size: 18px; width: 32px; height: 32px;"
+  >
+    <img
+      class="mt-image-img"
+      height="32"
+      src=""
+      style="object-fit: contain; height: 32px;"
+      width="32"
+    />
+    <div
+      class="mt-image-intermediate"
+      role="placeholder"
+    />
+  </div>
+</div>
+`;

@@ -1,7 +1,6 @@
 import {Image} from '..';
-import {customRender, sleep, screen} from '../../../../tests/utils';
+import {customRender, sleep, screen, act} from '../../../../tests/utils';
 import mountTest from '../../../../tests/mountTest';
-
 
 const LOAD_SUCCESS_SRC = 'LOAD_SUCCESS_SRC';
 
@@ -61,7 +60,7 @@ describe('Image', () => {
         await sleep(50);
         expect(screen.getByRole('custom-placeholder')).toBeInTheDocument();
         await sleep(200);
-        expect(onLoad).toBeCalledTimes(2);
+        expect(onLoad).toBeCalledTimes(1);
     });
 
     it('render image by error status', async () => {
@@ -74,5 +73,33 @@ describe('Image', () => {
         await sleep(200);
         expect(screen.getByRole('custom-fallback')).toBeInTheDocument();
         expect(onError).toBeCalledTimes(2);
+    });
+
+    it('not render show placeholder', async () => {
+        const {container} = customRender(<Image src={getSuccessSrc()} placeholder={false} />);
+        await sleep(50);
+        expect(container.querySelector('[role=placeholder]')).not.toBeInTheDocument();
+    });
+
+    // lazy load
+    it('render image by lazy load', async () => {
+        const mockIntersectionObserver = jest.fn().mockReturnValue({
+            observe: () => null,
+            disconnect: () => null,
+        });
+        window.IntersectionObserver = mockIntersectionObserver;
+        const {container} = customRender(<Image src={LOAD_SUCCESS_SRC} lazy />);
+        const calls = mockIntersectionObserver.mock.calls;
+        const [onChange] = calls[calls.length - 1];
+        act(() => {
+            onChange([
+                {
+                    isIntersecting: true,
+                },
+            ]);
+        });
+
+        await sleep(200);
+        expect(container.querySelector('img')).toHaveAttribute('src', LOAD_SUCCESS_SRC);
     });
 });
