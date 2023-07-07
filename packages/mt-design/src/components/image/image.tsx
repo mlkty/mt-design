@@ -1,29 +1,34 @@
-import {c} from '@mlkty/mt-shared-utils';
+import {c, isString} from '@mlkty/mt-shared-utils';
 import {
     forwardRef,
     useImperativeHandle,
     useRef,
+    useState,
+    useEffect,
     type CSSProperties,
     type ReactElement,
     type ImgHTMLAttributes,
-    useState,
-    useEffect,
-    HTMLAttributes,
+    type HTMLAttributes,
 } from 'react';
 
 import {useConfigContext} from '../config-provider';
+import {LazyDetector} from './lazy-detector';
 import {isValidImage} from './utils';
 
-type ImageStatus = 'loading' | 'error' | 'success';
+type ImageStatus = 'normal' | 'loading' | 'error' | 'success';
 
-type ImageProps = Omit<ImgHTMLAttributes<HTMLImageElement>, 'placeholder' | 'onLoad' | 'onError'> & {
+type ImageProps =
+& Omit<ImgHTMLAttributes<HTMLImageElement>, 'placeholder' | 'onLoad' | 'onError'>
+& {
     width?: string | number;
     height?: string | number;
+    fit?: 'fill' | 'contain' | 'cover' | 'none' | 'scale-down';
+    lazy?: boolean;
 
     rootClassName?: string;
     rootStyle?: CSSProperties;
     fallback?: ReactElement | string;
-    placeholder?: ReactElement | string;
+    placeholder?: ReactElement | string | boolean;
 
     onLoad?: () => void;
     onError?: () => void;
@@ -39,7 +44,7 @@ const Image = forwardRef<ImageRef, ImageProps>((props, ref) => {
         src: imgSrc,
 
         // intermediate
-        placeholder,
+        placeholder = true,
         fallback,
 
         // style
@@ -49,6 +54,8 @@ const Image = forwardRef<ImageRef, ImageProps>((props, ref) => {
         style,
         width,
         height,
+        fit = 'fill',
+        lazy = false,
 
         // events
         onLoad,
@@ -59,7 +66,8 @@ const Image = forwardRef<ImageRef, ImageProps>((props, ref) => {
     const domRef = useRef<HTMLDivElement>(null!);
     const prevSrcRef = useRef<ImageProps['src']>();
 
-    const [status, setStatus] = useState<ImageStatus>('loading');
+    const [initialize, setInitialize] = useState(!lazy);
+    const [status, setStatus] = useState<ImageStatus>('normal');
     const loadAndErrorRef = useRef<{onLoad: () => void, onError: () => void}>({} as any);
 
     const {getPrefixCls} = useConfigContext();
@@ -73,13 +81,14 @@ const Image = forwardRef<ImageRef, ImageProps>((props, ref) => {
         setStatus('success');
         onLoad?.();
     };
+
     loadAndErrorRef.current.onError = () => {
         setStatus('error');
         onError?.();
     };
 
     useEffect(() => {
-        if (prevSrcRef.current !== imgSrc) {
+        if (initialize && prevSrcRef.current !== imgSrc) {
             isValidImage(imgSrc || '').then(valid => {
                 // 防止图片快速切换后，多次触发 load
                 if (imgSrc !== prevSrcRef.current) {
@@ -97,7 +106,7 @@ const Image = forwardRef<ImageRef, ImageProps>((props, ref) => {
             setStatus('loading');
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [imgSrc]);
+    }, [imgSrc, initialize]);
 
     useImperativeHandle(ref, () => ({
         nativeElement: domRef.current,
@@ -112,6 +121,7 @@ const Image = forwardRef<ImageRef, ImageProps>((props, ref) => {
 
     const imgStyle = {
         ...style,
+        'object-fit': fit,
         height, // to compat img default placeholder
     };
 
@@ -119,13 +129,19 @@ const Image = forwardRef<ImageRef, ImageProps>((props, ref) => {
     const isSuccess = status === 'success';
     const isLoading = status === 'loading';
 
-    const src = isSuccess ? imgSrc : '';
+    const src = initialize && isSuccess ? imgSrc : '';
 
-    const renderIntermediate = (intermediate: ReactElement | string, attrs?: HTMLAttributes<HTMLDivElement>) => {
+    const renderIntermediate = (
+        intermediate: ReactElement | string | boolean,
+        attrs?: HTMLAttributes<HTMLDivElement>
+    ) => {
+        if (intermediate === false) {
+            return null;
+        }
         return (
             <div className={`${prefixCls}-intermediate`} {...attrs}>
                 {
-                    typeof intermediate === 'string'
+                    isString(intermediate)
                         ? <img src={intermediate} alt="intermediate" />
                         : intermediate
                 }
@@ -135,6 +151,15 @@ const Image = forwardRef<ImageRef, ImageProps>((props, ref) => {
 
     return (
         <div ref={domRef} className={rootCls} style={wrapStyle}>
+            {
+                lazy && !initialize && (
+                    <LazyDetector
+                        onActive={() => {
+                            setInitialize(true);
+                        }}
+                    />
+                )
+            }
             {
                 fallback && isError
                     ? renderIntermediate(fallback, {role: 'fallback'})

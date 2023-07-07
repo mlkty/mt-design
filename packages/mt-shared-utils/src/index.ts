@@ -7,6 +7,7 @@ export * from './lock-scroll';
 export * from './merge-props';
 export * from './resolve-container';
 export * from './resolve-scroll-container';
+export * from './resolve-target-element';
 export * from './use-controlled';
 export * from './use-event';
 export * from './use-layout-effect';

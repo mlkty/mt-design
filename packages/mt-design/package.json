@@ -10,7 +10,8 @@
     },
     "dependencies": {
         "@mlkty/mt-design-headless": "workspace:*",
-        "@mlkty/mt-shared-utils": "workspace:*"
+        "@mlkty/mt-shared-utils": "workspace:*",
+        "intersection-observer": "^0.12.2"
     },
     "devDependencies": {
         "@types/node": "^20.3.1",
