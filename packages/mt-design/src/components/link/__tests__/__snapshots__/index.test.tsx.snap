@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Link render empty link 1`] = `
+<div>
+  <a
+    class="mt-link mt-link--default mt-link--underline-hover"
+  >
+    <span
+      class="mt-link-inner"
+    />
+  </a>
+</div>
+`;

@@ -1,0 +1,59 @@
+
+@mixin underline {
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 0;
+        border-bottom: 1px solid var(--mt-link-color);
+    }
+}
+
+$prefix: mt-link;
+
+.#{$prefix} {
+    --mt-link-color: var(--mt-default-color, #11114a);
+
+    display: inline-flex;
+    align-items: center;
+    color: var(--mt-link-color);
+    line-height: 1.2;
+    position: relative;
+    vertical-align: middle;
+    text-decoration: none;
+    cursor: pointer;
+    outline: none;
+
+    &:not(.#{$prefix}--disabled) {
+        &:hover {
+            opacity: .8;
+        }
+
+        &.#{$prefix}--underline-hover:hover {
+            @include underline();
+        }
+
+        &.#{$prefix}--underline-always {
+            @include underline();
+        }
+    }
+
+    // ========== modify ==========
+    &--primary {
+        --mt-link-color: var(--mt-primary-color, #409eff);
+    }
+
+    &--disabled {
+        opacity: .4;
+        cursor: not-allowed;
+    }
+
+    // ========== children ==========
+    &-inner {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
