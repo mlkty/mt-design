@@ -22,7 +22,7 @@ const useLayoutEffect = (
     }, []);
 };
 
-export const useLayoutUpdateEffect: typeof useEffect = (callback, deps) => {
+const useLayoutUpdateEffect: typeof useEffect = (callback, deps) => {
     useLayoutEffect(firstMount => {
         if (!firstMount) {
             return callback();
@@ -31,4 +31,7 @@ export const useLayoutUpdateEffect: typeof useEffect = (callback, deps) => {
     }, deps);
 };
 
-export default useLayoutEffect;
+export {
+    useLayoutEffect,
+    useLayoutUpdateEffect,
+};

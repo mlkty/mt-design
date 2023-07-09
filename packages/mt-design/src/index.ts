@@ -10,3 +10,4 @@ export * from './components/link';
 export * from './components/overlay';
 export * from './components/radio';
 export * from './components/space';
+export * from './components/textarea';

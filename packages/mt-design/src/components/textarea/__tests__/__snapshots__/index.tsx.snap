@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Textarea render autoSize textarea 1`] = `
+<div>
+  <div
+    class="mt-textarea"
+  >
+    <textarea
+      class="mt-textarea-element"
+      rows="2"
+      style="height: 0px;"
+    />
+    <textarea
+      aria-hidden="true"
+      class="mt-textarea-element mt-textarea-element--hidden"
+      readonly=""
+    />
+  </div>
+</div>
+`;
+
+exports[`Textarea render single textarea 1`] = `
+<div>
+  <div
+    class="mt-textarea"
+  >
+    <textarea
+      class="mt-textarea-element"
+      rows="2"
+      style="height: auto;"
+    />
+  </div>
+</div>
+`;
